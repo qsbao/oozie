@@ -1093,7 +1093,13 @@ A synchronous coordinator definition is defined by a name, start time and end ti
    * **<font color="#0000ff"> timezone:</font>** The timezone of the coordinator application.
    * **<font color="#0000ff"> frequency: </font>** The frequency, in minutes, to materialize actions. Refer to section #4 'Time Interval Representation' for syntax details.
    * Control information:
-      * **<font color="#0000ff"> timeout: </font>** The maximum time, in minutes, that a materialized action will be waiting for the additional conditions to be satisfied before being discarded. A timeout of `0` indicates that if all the input events are not satisfied at the time of action materialization, the action should timeout immediately. A timeout of `-1` indicates no timeout, the materialized action will wait forever for the other conditions to be satisfied. The default value is `120` minutes. The timeout can only cause a `WAITING` action to transition to `TIMEDOUT`; once the data dependency is satisified, a `WAITING` action transitions to `READY`, and the timeout no longer has any affect, even if the action hasn't transitioned to `SUBMITTED` or `RUNNING` when it expires.
+      * **<font color="#0000ff"> timeout: </font>** The maximum time, in minutes, that a materialized action will be waiting
+      for the additional conditions to be satisfied before being discarded. A timeout of `0` indicates that if all the input
+      events are not satisfied at the time of action materialization, the action should timeout immediately. A timeout of
+      `-1` indicates no timeout, the materialized action will wait forever for the other conditions to be satisfied. The
+      default value is `120` minutes. The timeout can only cause a `WAITING` action to transition to `TIMEDOUT`; once the
+      data dependency is satisified, a `WAITING` action transitions to `READY`, and the timeout no longer has any affect,
+      even if the action hasn't transitioned to `SUBMITTED` or `RUNNING` when it expires.
       * **<font color="#0000ff"> concurrency: </font>** The maximum number of actions for this job that can be running at the same time. This value allows to materialize and submit multiple instances of the coordinator app, and allows operations to catchup on delayed processing. The default value is `1`.
       * **<font color="#0000ff"> execution: </font>** Specifies the execution order if multiple instances of the coordinator job have satisfied their execution criteria. Valid values are:
          * `FIFO` (oldest first) **default**.
